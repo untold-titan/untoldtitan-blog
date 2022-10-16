@@ -1,38 +1,18 @@
-# create-svelte
+# Work has BEGUN!!!
+I've started working on my new blog site.
+Keep up with the progress on this repo.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+# Tech?
+Yep, I got some cool tech here
+- Svelte
+- Three.js
+- Pocketbase backend
+- Azure VM to host it all
 
-## Creating a project
+# Future Additions?
+I want to add 2 things.
+1. The Lab, a testing place for all my web based experiments, and also possibly open it up to other developers to host their things on my site to show off their work as well.
+2. I'm considering making an integration with Manabox, to show my MTG collection on my site, and be able to sell cards from my site. 
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+# Found something wrong? Got ideas?
+Feel free to open an issue or message me on discord. Untold_Titan#1616

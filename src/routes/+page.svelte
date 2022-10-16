@@ -47,6 +47,10 @@
   });
 </script>
 
+<head>
+  <title>Titan's Blog</title>
+</head>
+
 <div>
   <div class="flex">
     <h1 class="left">Do you like technology?</h1>
@@ -60,6 +64,9 @@
     </h3>
     <h3>
       This site is where my blog, experiments, and history are all located. Thank you for visiting, and let the experimentation commence!
+    </h3>
+    <h3>
+      Also, this site is currently still under construction, so expect stupid things.
     </h3>
   </div>
   <h1>Recent Blog Posts</h1>
