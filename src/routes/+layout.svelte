@@ -12,6 +12,11 @@
 
 <slot />
 
+<div class="footer primaryB">
+    <p>This site was built with Svelte</p>
+    <p>Designed with the help of my awesome friends!</p>
+</div>
+
 <style>
     /* The Global Theme */
     :global(.primaryB) {
@@ -53,7 +58,9 @@
         margin-right: 40px;
         background-color: #3d717c;
         color: #ffffff;
+        font-family: "Montserrat", sans-serif;
     }
+
 
     /* Actual styles related to the topbar */
     .topbar {
@@ -72,5 +79,12 @@
         margin-left: auto;
         margin-right: 1%;
         margin-top: 20px;
+    }
+
+    .footer{
+        height: 200px;
+        margin-top: 50px;
+        padding-top: 75px;
+        text-align: center;
     }
 </style>
