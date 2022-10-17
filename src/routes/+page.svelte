@@ -52,7 +52,7 @@
   let posts = 0;
   //Pocketbase
   onMount(() => {
-    const client = new Pocketbase("http://cataclysmpocket.tech/");
+    const client = new Pocketbase("https://cataclysmpocket.tech/");
     client.records
       .getFullList("posts", 200 /* batch size */, {
         sort: "-created",
