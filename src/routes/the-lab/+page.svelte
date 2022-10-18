@@ -1,53 +1,58 @@
-`<script>
+<script>
     let loginStatus = 0; //0 - None, 1 - Sign up, 2 - Login
     let canvas;
     import * as THREE from "three";
     import { onMount } from "svelte";
-    import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
-    import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+    import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
+    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-    onMount(() =>{
-        const camera = new THREE.PerspectiveCamera(70,1,0.01,1000);
+    onMount(() => {
+        const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 1000);
         const scene = new THREE.Scene();
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
-            canvas: canvas
-        })
+            canvas: canvas,
+        });
 
         camera.position.z = 10;
         let flask;
         const loader = new FBXLoader();
-        loader.load("/Flask.fbx", (obj) => {
-            obj.traverse((child) => {
-                if(child.material){
-                    child.material = new THREE.MeshBasicMaterial({
-                        wireframe:true,
-                        color:0x00FFFF,
-                    })
-                }
-            })
-            obj.scale.set(0.007,0.007,0.007)
-            scene.add(obj)
-            flask = obj;
-        },undefined,(error) =>{
-            console.log(error)
-        })
+        loader.load(
+            "/Flask.fbx",
+            (obj) => {
+                obj.traverse((child) => {
+                    if (child.material) {
+                        child.material = new THREE.MeshBasicMaterial({
+                            wireframe: true,
+                            color: 0x00ffff,
+                        });
+                    }
+                });
+                obj.scale.set(0.007, 0.007, 0.007);
+                scene.add(obj);
+                flask = obj;
+            },
+            undefined,
+            (error) => {
+                console.log(error);
+            }
+        );
 
-        const sun = new THREE.DirectionalLight(0xffffff,10)
-        scene.add(sun)
+        const sun = new THREE.DirectionalLight(0xffffff, 10);
+        scene.add(sun);
 
-        function animate(){
-            if(flask != undefined){
+        function animate() {
+            if (flask != undefined) {
                 flask.rotation.x += 0.01;
                 flask.rotation.z -= 0.02;
             }
             requestAnimationFrame(animate);
 
-            renderer.render(scene,camera);
+            renderer.render(scene, camera);
         }
 
-        animate()
-    })
+        animate();
+    });
 </script>
 
 <h1>The Lab</h1>
@@ -68,15 +73,11 @@
                 loginStatus = 2;
             }}>Login</button
         >
-        <button
-            on:click={() => {
-                loginStatus = 0;
-            }}
-            class="red">Close</button
-        >
     </div>
     {#if loginStatus == 0}
-        <canvas bind:this={canvas}></canvas>
+    <div class="center">
+        <canvas bind:this={canvas} />
+    </div>
     {:else if loginStatus == 1}
         <div class="form">
             <h2>Sign Up</h2>
@@ -91,7 +92,7 @@
                 </li>
                 <li>
                     <p>Username</p>
-                    <input type="text"/>
+                    <input type="text" />
                 </li>
                 <li>
                     <button>Sign me UP!</button>
@@ -116,7 +117,7 @@
             </ul>
         </div>
     {/if}
-    <div class="spacer"/>
+    <div class="spacer" />
 </div>
 
 <style>
@@ -138,9 +139,15 @@
         margin: 0 auto;
     }
 
-    canvas{
-        width: 300px;
-        height: 300px;
+    .center{
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    canvas {
+        width: 500px;
+        height: 500px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -169,7 +176,7 @@
     .red {
         background-color: darkred;
     }
-    .spacer{
+    .spacer {
         height: 150px;
     }
 </style>
