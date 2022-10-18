@@ -1,12 +1,16 @@
+<script>
+    import { goto } from "$app/navigation";
+</script>
+
 <div class="primaryB topbar">
     <div class="title">
         <h1>Titan</h1>
         <p>Software Developer</p>
     </div>
     <div class="nav">
-        <button>Home</button>
-        <button>Who?</button>
-        <button>The Lab</button>
+        <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
+        <button class="topbar-buttons">Who?</button>
+        <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
     </div>
 </div>
 
@@ -55,18 +59,20 @@
         padding: 7px 15px;
         border: 0;
         border-radius: 2px;
-        margin-right: 40px;
         background-color: #3d717c;
         color: #ffffff;
         font-family: "Montserrat", sans-serif;
     }
-
 
     /* Actual styles related to the topbar */
     .topbar {
         width: 100%;
         height: fit-content;
         display: flex;
+    }
+
+    .topbar-buttons{
+        margin-right: 40px;
     }
 
     .title {
@@ -81,7 +87,7 @@
         margin-top: 20px;
     }
 
-    .footer{
+    .footer {
         height: 200px;
         margin-top: 50px;
         padding-top: 75px;

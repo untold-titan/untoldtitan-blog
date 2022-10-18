@@ -4,7 +4,6 @@
   import Post from "../components/Post.svelte";
   import { onMount } from "svelte";
   import * as THREE from "three";
-  import Layout from "./+layout.svelte";
   let canvas;
 
   //three.js
@@ -52,7 +51,7 @@
   let posts = 0;
   //Pocketbase
   onMount(() => {
-    const client = new Pocketbase("http://cataclysmpocket.tech/");
+    const client = new Pocketbase("https://cataclysmpocket.tech/");
     client.records
       .getFullList("posts", 200 /* batch size */, {
         sort: "-created",
@@ -126,6 +125,8 @@
   }
   .spacer {
     margin-bottom: 75px;
+    margin-left: 150px;
+    margin-right: 150px;
   }
 
   .left {
@@ -134,10 +135,5 @@
   .flex {
     margin-top: 100px;
     display: flex;
-  }
-
-  .blog {
-    margin-left: auto;
-    margin-right: auto;
   }
 </style>
