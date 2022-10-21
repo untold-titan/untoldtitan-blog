@@ -92,7 +92,7 @@
     </h3>
   </div>
   <h1>Recent Feed Posts</h1>
-  <div class="flex">
+  <div class="flex secondary posts">
     {#if posts != 0}
       {#each posts as post}
         <Post {...post} />
@@ -135,5 +135,9 @@
   .flex {
     margin-top: 100px;
     display: flex;
+  }
+
+  .posts{
+    padding:30px 15px
   }
 </style>

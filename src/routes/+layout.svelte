@@ -18,7 +18,7 @@
 
 <slot />
 
-<div class="footer-spacer"/>
+<div class="footer-spacer secondary"/>
 
 <!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
@@ -34,7 +34,7 @@
         background-color: #3C4048;
     }
     :global(.tritary) {
-        background-color: #B2B2B2;
+        background-color: #868686;
     }
     :global(.quad) {
         background-color: #EAEAEA;

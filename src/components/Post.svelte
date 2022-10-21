@@ -6,7 +6,7 @@
     export let linkURL = "";
 </script>
 
-<div>
+<div class="post-body tritary">
     <img src={imageURL} alt="Cursed" />
     <h1>{title}</h1>
     <p>
@@ -18,6 +18,11 @@
 </div>
 
 <style>
+    .post-body{
+        color:whitesmoke;
+        border-radius: 35px;
+        padding:20px
+    }
     div {
         width: 30%;
         margin-left: 1.5%;
