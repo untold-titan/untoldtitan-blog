@@ -13,13 +13,17 @@
         <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
     </div>
 </div>
+<!-- This div is needed to space out the topbar. -->
+<div class="topbar-spacer"/>
 
 <slot />
 
-<div class="footer secondary">
+<div class="footer-spacer"/>
+
+<!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
     <p>Designed with the help of my awesome friends!</p>
-</div>
+</div> -->
 
 <style>
     /* The Global Theme */
@@ -61,11 +65,21 @@
         font-family: "Montserrat", sans-serif;
     }
 
+    .topbar-spacer{
+        height: 60px;
+    }
+
+    .footer-spacer{
+        height: 75px;
+    }
+
     /* Actual styles related to the topbar */
     .topbar {
         width: 100%;
         height: fit-content;
         display: flex;
+        position: fixed;
+        top: 0;
     }
 
     .topbar-buttons{
@@ -85,9 +99,12 @@
     }
 
     .footer {
-        height: 200px;
+        height: 75px;
         margin-top: 50px;
-        padding-top: 75px;
+        padding-top: 35px;
         text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
 </style>

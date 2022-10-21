@@ -114,7 +114,7 @@
   }
   h3 {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 15px;
     font-size: 25px;
   }
   canvas {
@@ -124,9 +124,9 @@
     margin-right: auto;
   }
   .spacer {
-    margin-bottom: 75px;
-    margin-left: 150px;
-    margin-right: 150px;
+    margin: 75px 150px;
+    padding: 30px 50px;
+    border-radius: 35px;
   }
 
   .left {
