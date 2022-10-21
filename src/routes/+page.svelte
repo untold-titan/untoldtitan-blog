@@ -77,7 +77,7 @@
     <canvas bind:this={canvas} />
   </div>
   <h2>If yes, then you'll like this site.</h2>
-  <div class="spacer">
+  <div class="spacer secondary">
     <h3>
       I'm Titan, and this is my humble site, where I write about things that
       interest me, in the wonderful world of tech.
