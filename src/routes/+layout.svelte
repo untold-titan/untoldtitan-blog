@@ -2,7 +2,7 @@
     import { goto } from "$app/navigation";
 </script>
 
-<div class="primaryB topbar">
+<div class="secondary topbar">
     <div class="title">
         <h1>Titan</h1>
         <p>Software Developer</p>
@@ -16,27 +16,24 @@
 
 <slot />
 
-<div class="footer primaryB">
+<div class="footer secondary">
     <p>This site was built with Svelte</p>
     <p>Designed with the help of my awesome friends!</p>
 </div>
 
 <style>
     /* The Global Theme */
-    :global(.primaryB) {
-        background-color: #1b3059;
+    :global(.primary) {
+        background-color: #038e96;
     }
-    :global(.secondaryB) {
-        background-color: #395273;
+    :global(.secondary) {
+        background-color: #3C4048;
     }
-    :global(.primaryG) {
-        background-color: #143840;
+    :global(.tritary) {
+        background-color: #B2B2B2;
     }
-    :global(.secondaryG) {
-        background-color: #2d5949;
-    }
-    :global(.accent) {
-        background-color: #f2e3c4;
+    :global(.quad) {
+        background-color: #EAEAEA;
     }
     /* :global(div) {
         color: #ffffff;
@@ -47,7 +44,7 @@
     :global(body) {
         margin: 0;
         font-family: "Montserrat", sans-serif;
-        color: #ffffff;
+        color: #FFFFFF;
     }
     :global(h1) {
         margin: 0;
