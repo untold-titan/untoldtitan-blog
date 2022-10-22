@@ -1,7 +1,7 @@
 <!-- Home Page -->
 <script>
   import Pocketbase from "pocketbase";
-  import Post from "../components/Post.svelte";
+  import Post from "../components/Feed-Post.svelte";
   import { onMount } from "svelte";
   import * as THREE from "three";
   let canvas;

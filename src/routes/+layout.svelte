@@ -18,7 +18,7 @@
 
 <slot />
 
-<div class="footer-spacer secondary"/>
+<div class="footer-spacer"/>
 
 <!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
