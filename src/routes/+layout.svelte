@@ -103,7 +103,7 @@
         margin-top: 20px;
     }
 
-    .footer {
+    /* .footer {
         height: 75px;
         margin-top: 50px;
         padding-top: 35px;
@@ -111,5 +111,5 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-    }
+    } */
 </style>

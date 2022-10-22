@@ -45,8 +45,4 @@
     text-align: center;
     margin-top: 50px;
   }
-  p {
-    margin-top: 15px;
-    text-align: center;
-  }
 </style>
