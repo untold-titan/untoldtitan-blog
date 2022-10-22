@@ -2,7 +2,6 @@
     import { goto } from "$app/navigation";
     import { userStore } from "../stores";
     import { onMount } from "svelte"
-    import { userStore } from "../stores";
     let user = 0;
     let width;
     userStore.subscribe((value) => {
