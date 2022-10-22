@@ -9,7 +9,7 @@
     </div>
     <div class="nav">
         <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
-        <button class="topbar-buttons">Who?</button>
+        <button on:click={() => goto("/blog")} class="topbar-buttons">Blog</button>
         <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
     </div>
 </div>
@@ -18,7 +18,7 @@
 
 <slot />
 
-<div class="footer-spacer secondary"/>
+<div class="footer-spacer"/>
 
 <!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
@@ -38,6 +38,11 @@
     }
     :global(.quad) {
         background-color: #EAEAEA;
+    }
+    :global(.center){
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
     }
     /* :global(div) {
         color: #ffffff;

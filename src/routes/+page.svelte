@@ -1,9 +1,10 @@
 <!-- Home Page -->
 <script>
   import Pocketbase from "pocketbase";
-  import Post from "../components/Post.svelte";
+  import Post from "../components/Feed-Post.svelte";
   import { onMount } from "svelte";
   import * as THREE from "three";
+  import Loading from "../components/Loading.svelte";
   let canvas;
 
   //three.js
@@ -74,7 +75,7 @@
 <div>
   <div class="flex">
     <h1 class="left">Do you like technology?</h1>
-    <canvas bind:this={canvas} />
+    <canvas bind:this={canvas} width="750" height="750" />
   </div>
   <h2>If yes, then you'll like this site.</h2>
   <div class="spacer secondary">
@@ -97,6 +98,10 @@
       {#each posts as post}
         <Post {...post} />
       {/each}
+    {:else}
+      <div class="center">
+        <Loading />
+      </div>
     {/if}
   </div>
 </div>
@@ -136,8 +141,7 @@
     margin-top: 100px;
     display: flex;
   }
-
-  .posts{
-    padding:30px 15px
+  .posts {
+    padding: 30px 15px;
   }
 </style>
