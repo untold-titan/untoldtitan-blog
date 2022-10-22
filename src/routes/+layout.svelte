@@ -1,5 +1,12 @@
 <script>
     import { goto } from "$app/navigation";
+    import { userStore } from "../stores";
+    let user = 0;
+    userStore.subscribe((value) => {
+        if (value != 0) {
+            user = value.user;
+        }
+    });
 </script>
 
 <div class="secondary topbar">
@@ -9,37 +16,46 @@
     </div>
     <div class="nav">
         <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
-        <button on:click={() => goto("/blog")} class="topbar-buttons">Blog</button>
-        <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
+        <button on:click={() => goto("/blog")} class="topbar-buttons"
+            >Blog</button
+        >
+        {#if user == 0}
+            <button on:click={() => goto("/the-lab")} class="topbar-buttons"
+                >The Lab</button
+            >
+        {:else}
+            <button on:click={() => goto("/the-lab/profile")} class="topbar-buttons"
+                >{user.profile.name}</button
+            >
+        {/if}
     </div>
 </div>
 <!-- This div is needed to space out the topbar. -->
-<div class="topbar-spacer"/>
+<div class="topbar-spacer" />
 
 <slot />
 
-<div class="footer-spacer"/>
+<div class="footer-spacer" />
 
 <!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
     <p>Designed with the help of my awesome friends!</p>
 </div> -->
-
 <style>
     /* The Global Theme */
     :global(.primary) {
         background-color: #038e96;
     }
     :global(.secondary) {
-        background-color: #3C4048;
+        background-color: #3c4048;
     }
     :global(.tritary) {
         background-color: #868686;
     }
     :global(.quad) {
-        background-color: #EAEAEA;
+        background-color: #eaeaea;
     }
-    :global(.center){
+    :global(.center) {
         margin-left: auto;
         margin-right: auto;
         width: fit-content;
@@ -53,7 +69,7 @@
     :global(body) {
         margin: 0;
         font-family: "Montserrat", sans-serif;
-        color: #FFFFFF;
+        color: #ffffff;
     }
     :global(h1) {
         margin: 0;
@@ -70,11 +86,11 @@
         font-family: "Montserrat", sans-serif;
     }
 
-    .topbar-spacer{
+    .topbar-spacer {
         height: 60px;
     }
 
-    .footer-spacer{
+    .footer-spacer {
         height: 75px;
     }
 
@@ -87,7 +103,7 @@
         top: 0;
     }
 
-    .topbar-buttons{
+    .topbar-buttons {
         margin-right: 40px;
     }
 

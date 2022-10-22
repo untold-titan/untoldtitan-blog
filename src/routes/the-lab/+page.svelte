@@ -1,11 +1,21 @@
 <script>
-    let loginStatus = 0; //0 - None, 1 - Sign up, 2 - Login
-    let canvas;
     import * as THREE from "three";
     import { onMount } from "svelte";
     import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
-    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+    import Pocketbase from "pocketbase";
+    import { userStore } from "../../stores";
+    import {goto} from "$app/navigation"
 
+    let username;
+    let password;
+    let passwordConfirm;
+    let email;
+    let errorText = "";
+    let user = {};
+    let loginStatus = 0; //0 - None, 1 - Sign up, 2 - Login
+    let canvas;
+
+    //ThreeJS
     onMount(() => {
         const camera = new THREE.PerspectiveCamera(70, 1, 0.01, 1000);
         const scene = new THREE.Scene();
@@ -53,6 +63,51 @@
 
         animate();
     });
+    //Pocketbase
+    const client = new Pocketbase("https://cataclysmpocket.tech/");
+    const signUp = () => {
+        if (
+            username != "" &&
+            password != "" &&
+            password == passwordConfirm &&
+            email != ""
+        ) {
+            // create user
+            client.users
+                .create({
+                    email: email,
+                    password: password,
+                    passwordConfirm: passwordConfirm,
+                })
+                .then((val) => {
+                    console.log(val);
+                    user = val;
+                    client.records.update("profiles", user.profile.id, {
+                        name: username,
+                    });
+                    client.users.requestVerification(user.email);
+                    userStore.set(user);
+                    goto("/the-lab/profile")
+                })
+                .catch((error) => {
+                    console.log(error);
+                    errorText = error;
+                });
+        }
+    };
+
+    const login = () => {
+        client.users
+            .authViaEmail(email, password)
+            .then((yay) => {
+                userStore.set(yay);
+                goto("/the-lab/profile")
+            })
+            .catch((error) => {
+                console.log(error);
+                errorText = error;
+            });
+    };
 </script>
 
 <h1>The Lab</h1>
@@ -60,64 +115,71 @@
     <p>
         Welcome to The Lab. This is the experimental part of my website, and
         where I host/play with my experiments that I create. If you're
-        interested in taking part in this, please create an account, and log in!
+        interested in taking part, please create an account or log in!
     </p>
-    <div class="buttons">
-        <button
-            on:click={() => {
-                loginStatus = 1;
-            }}>Sign Up</button
-        >
-        <button
-            on:click={() => {
-                loginStatus = 2;
-            }}>Login</button
-        >
-    </div>
-    {#if loginStatus == 0}
-    <div class="center">
-        <canvas bind:this={canvas}  width="1000" height="1000"/>
-    </div>
-    {:else if loginStatus == 1}
-        <div class="form">
-            <h2>Sign Up</h2>
-            <ul>
-                <li>
-                    <p>Email</p>
-                    <input type="email" />
-                </li>
-                <li>
-                    <p>Password</p>
-                    <input type="password" />
-                </li>
-                <li>
-                    <p>Username</p>
-                    <input type="text" />
-                </li>
-                <li>
-                    <button>Sign me UP!</button>
-                </li>
-            </ul>
+    <div class="secondary login-form">
+        <div class="buttons">
+            <button
+                on:click={() => {
+                    loginStatus = 1;
+                }}>Sign Up</button
+            >
+            <button
+                on:click={() => {
+                    loginStatus = 2;
+                }}>Login</button
+            >
         </div>
-    {:else if loginStatus == 2}
-        <div class="form">
-            <h2>Login</h2>
-            <ul>
-                <li>
-                    <p>Email</p>
-                    <input type="email" />
-                </li>
-                <li>
-                    <p>Password</p>
-                    <input type="password" />
-                </li>
-                <li>
-                    <button>Log me IN!</button>
-                </li>
-            </ul>
-        </div>
-    {/if}
-    <div class="spacer" />
+        {#if loginStatus == 0}
+            <div class="center">
+                <canvas bind:this={canvas} width="1000" height="1000" />
+            </div>
+        {:else if loginStatus == 1}
+            <div class="form">
+                <h2>Sign Up</h2>
+                <ul>
+                    <li>
+                        <p>Username</p>
+                        <input type="text" bind:value={username} />
+                    </li>
+                    <li>
+                        <p>Email</p>
+                        <input type="email" bind:value={email} />
+                    </li>
+                    <li>
+                        <p>Password</p>
+                        <input type="password" bind:value={password} />
+                    </li>
+                    <li>
+                        <p>Confirm Password</p>
+                        <input type="password" bind:value={passwordConfirm} />
+                    </li>
+                    <li>
+                        <button on:click={signUp}>Sign me UP!</button>
+                    </li>
+                </ul>
+                <p class="error">{errorText}</p>
+            </div>
+        {:else if loginStatus == 2}
+            <div class="form">
+                <h2>Login</h2>
+                <ul>
+                    <li>
+                        <p>Email</p>
+                        <input type="email" bind:value={email} />
+                    </li>
+                    <li>
+                        <p>Password</p>
+                        <input type="password" bind:value={password} />
+                    </li>
+                    <li>
+                        <button on:click={login}>Log me IN!</button>
+                    </li>
+                </ul>
+                <p class="error">{errorText}</p>
+            </div>
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -139,15 +201,15 @@
         margin: 0 auto;
     }
 
-    .center{
+    .center {
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
     }
 
     canvas {
-        width: 500px;
-        height: 500px;
+        width: 300px;
+        height: 300px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -170,11 +232,22 @@
 
     .buttons {
         width: fit-content;
-        margin: 45px auto;
+        margin: 35px auto;
     }
 
-    .red {
-        background-color: darkred;
+    .error {
+        color: red;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .login-form {
+        width: 100%;
+        height: 450px;
+        padding-top: 1px;
+        padding-bottom: 15px;
+        margin-top: 30px;
+        border-radius: 35px;
     }
     .spacer {
         height: 150px;
