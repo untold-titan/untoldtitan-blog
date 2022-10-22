@@ -35,4 +35,10 @@
         border-radius: 50px;
         overflow: hidden;
     }
+
+    @media screen and (max-width: 640px){
+        div{
+            width: fit-content;
+        }
+    }
 </style>

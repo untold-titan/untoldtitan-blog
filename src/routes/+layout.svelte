@@ -1,5 +1,9 @@
 <script>
     import { goto } from "$app/navigation";
+    let width;
+    onMount(() => {
+        width = screen.width;
+    });
 </script>
 
 <div class="secondary topbar">
@@ -8,9 +12,26 @@
         <p>Software Developer</p>
     </div>
     <div class="nav">
-        <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
-        <button on:click={() => goto("/blog")} class="topbar-buttons">Blog</button>
-        <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
+        {#if width < 640}
+        <button>Open Menu</button>
+        {:else}
+            <button on:click={() => goto("/")} class="topbar-buttons"
+                >Home</button
+            >
+            <button on:click={() => goto("/blog")} class="topbar-buttons"
+                >Blog</button
+            >
+            {#if user == 0}
+                <button on:click={() => goto("/the-lab")} class="topbar-buttons"
+                    >The Lab</button
+                >
+            {:else}
+                <button
+                    on:click={() => goto("/the-lab/profile")}
+                    class="topbar-buttons">{user.profile.name}</button
+                >
+            {/if}
+        {/if}
     </div>
 </div>
 <!-- This div is needed to space out the topbar. -->

@@ -72,10 +72,12 @@
   <title>Titan's Blog</title>
 </head>
 
-<div>
+<div class="main">
   <div class="flex">
     <h1 class="left">Do you like technology?</h1>
-    <canvas bind:this={canvas} width="750" height="750" />
+    <div class="container">
+      <canvas bind:this={canvas} width="750" height="750" />
+    </div>
   </div>
   <h2>If yes, then you'll like this site.</h2>
   <div class="spacer secondary">
@@ -143,5 +145,25 @@
   }
   .posts {
     padding: 30px 15px;
+  }
+  .container{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Media Queries */
+  /* Mobile Devices */
+  @media screen and (max-width: 640px){
+    .flex{
+      display: block;
+    }
+    .spacer{
+      border-radius: 0px;
+      margin: 75px 0px;
+    }
+    .posts{
+      padding: 35px 27px;
+    }
   }
 </style>
