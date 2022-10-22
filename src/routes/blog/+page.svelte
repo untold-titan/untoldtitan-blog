@@ -1,5 +1,21 @@
 <script>
     import Post from "../../components/Blog-Post.svelte";
+
+    onMount(() => {
+    const client = new Pocketbase("https://cataclysmpocket.tech/");
+    client.records
+      .getFullList("posts", 200 /* batch size */, {
+        sort: "-created",
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res[0]);
+        posts = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 </script>
 
 <h1>The Golb</h1>

@@ -76,7 +76,7 @@
     </div>
     {#if loginStatus == 0}
     <div class="center">
-        <canvas bind:this={canvas} />
+        <canvas bind:this={canvas}  width="1000" height="1000"/>
     </div>
     {:else if loginStatus == 1}
         <div class="form">

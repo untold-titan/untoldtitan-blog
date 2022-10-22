@@ -4,7 +4,9 @@
   import Post from "../components/Feed-Post.svelte";
   import { onMount } from "svelte";
   import * as THREE from "three";
+  import Loading from "../components/Loading.svelte";
   let canvas;
+  
 
   //three.js
   onMount(() => {
@@ -74,7 +76,7 @@
 <div>
   <div class="flex">
     <h1 class="left">Do you like technology?</h1>
-    <canvas bind:this={canvas} />
+    <canvas bind:this={canvas} width="750" height="750"/>
   </div>
   <h2>If yes, then you'll like this site.</h2>
   <div class="spacer secondary">
@@ -100,6 +102,8 @@
     {/if}
   </div>
 </div>
+
+<Loading/>
 
 <style>
   h1 {
@@ -137,7 +141,7 @@
     display: flex;
   }
 
-  .posts{
-    padding:30px 15px
+  .posts {
+    padding: 30px 15px;
   }
 </style>
