@@ -1,5 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte"
     let width;
     onMount(() => {
         width = screen.width;
@@ -21,16 +22,9 @@
             <button on:click={() => goto("/blog")} class="topbar-buttons"
                 >Blog</button
             >
-            {#if user == 0}
-                <button on:click={() => goto("/the-lab")} class="topbar-buttons"
-                    >The Lab</button
-                >
-            {:else}
-                <button
-                    on:click={() => goto("/the-lab/profile")}
-                    class="topbar-buttons">{user.profile.name}</button
-                >
-            {/if}
+            <button on:click={() => goto("/the-lab")} class="topbar-buttons"
+                >The Lab</button
+            >
         {/if}
     </div>
 </div>
