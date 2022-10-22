@@ -4,7 +4,6 @@
   import Post from "../components/Post.svelte";
   import { onMount } from "svelte";
   import * as THREE from "three";
-  import Layout from "./+layout.svelte";
   let canvas;
 
   //three.js
@@ -78,7 +77,7 @@
     <canvas bind:this={canvas} />
   </div>
   <h2>If yes, then you'll like this site.</h2>
-  <div class="spacer">
+  <div class="spacer secondary">
     <h3>
       I'm Titan, and this is my humble site, where I write about things that
       interest me, in the wonderful world of tech.
@@ -93,7 +92,7 @@
     </h3>
   </div>
   <h1>Recent Feed Posts</h1>
-  <div class="flex">
+  <div class="flex secondary posts">
     {#if posts != 0}
       {#each posts as post}
         <Post {...post} />
@@ -115,7 +114,7 @@
   }
   h3 {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 15px;
     font-size: 25px;
   }
   canvas {
@@ -125,7 +124,9 @@
     margin-right: auto;
   }
   .spacer {
-    margin-bottom: 75px;
+    margin: 75px 150px;
+    padding: 30px 50px;
+    border-radius: 35px;
   }
 
   .left {
@@ -136,8 +137,7 @@
     display: flex;
   }
 
-  .blog {
-    margin-left: auto;
-    margin-right: auto;
+  .posts{
+    padding:30px 15px
   }
 </style>
