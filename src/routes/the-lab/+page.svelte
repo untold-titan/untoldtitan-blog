@@ -57,7 +57,7 @@
 
 <h1>The Lab</h1>
 <div class="content">
-    <p>
+    <p class="info">
         Welcome to The Lab. This is the experimental part of my website, and
         where I host/play with my experiments that I create. If you're
         interested in taking part in this, please create an account, and log in!
@@ -176,7 +176,13 @@
     .red {
         background-color: darkred;
     }
-    .spacer {
-        height: 150px;
+    @media screen and (max-width: 640px){
+        .content{
+            margin: 35px 0px;
+        }
+        
+        .info{
+            padding: 15px;
+        }
     }
 </style>

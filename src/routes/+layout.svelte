@@ -1,5 +1,10 @@
 <script>
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte"
+    let width;
+    onMount(() => {
+        width = screen.width;
+    });
 </script>
 
 <div class="secondary topbar">
@@ -8,9 +13,19 @@
         <p>Software Developer</p>
     </div>
     <div class="nav">
-        <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
-        <button on:click={() => goto("/blog")} class="topbar-buttons">Blog</button>
-        <button on:click={() => goto("/the-lab")} class="topbar-buttons">The Lab</button>
+        {#if width < 640}
+        <button>Open Menu</button>
+        {:else}
+            <button on:click={() => goto("/")} class="topbar-buttons"
+                >Home</button
+            >
+            <button on:click={() => goto("/blog")} class="topbar-buttons"
+                >Blog</button
+            >
+            <button on:click={() => goto("/the-lab")} class="topbar-buttons"
+                >The Lab</button
+            >
+        {/if}
     </div>
 </div>
 <!-- This div is needed to space out the topbar. -->

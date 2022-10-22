@@ -71,4 +71,10 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    @media screen and (max-width: 640px){
+        .post{
+            height: fit-content;
+        }
+    }
 </style>
