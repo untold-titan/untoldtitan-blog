@@ -39,6 +39,11 @@
     :global(.quad) {
         background-color: #EAEAEA;
     }
+    :global(.center){
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
     /* :global(div) {
         color: #ffffff;
     } */

@@ -6,7 +6,6 @@
   import * as THREE from "three";
   import Loading from "../components/Loading.svelte";
   let canvas;
-  
 
   //three.js
   onMount(() => {
@@ -76,7 +75,7 @@
 <div>
   <div class="flex">
     <h1 class="left">Do you like technology?</h1>
-    <canvas bind:this={canvas} width="750" height="750"/>
+    <canvas bind:this={canvas} width="750" height="750" />
   </div>
   <h2>If yes, then you'll like this site.</h2>
   <div class="spacer secondary">
@@ -99,11 +98,13 @@
       {#each posts as post}
         <Post {...post} />
       {/each}
+    {:else}
+      <div class="center">
+        <Loading />
+      </div>
     {/if}
   </div>
 </div>
-
-<Loading/>
 
 <style>
   h1 {
@@ -140,7 +141,6 @@
     margin-top: 100px;
     display: flex;
   }
-
   .posts {
     padding: 30px 15px;
   }

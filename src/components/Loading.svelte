@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import * as THREE from "three";
-    import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
     let canvas = {};
 
@@ -15,9 +14,9 @@
 
         cam.position.z = 30
 
-        const ring1 = new THREE.Mesh(new THREE.TorusGeometry(15, 1, 30, 200,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x7DE5ED}));
-        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(10, 1, 30, 200,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x81C6E8}));
-        const ring3 = new THREE.Mesh(new THREE.TorusGeometry(5, 1, 30, 200,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x5DA7DB}));
+        const ring1 = new THREE.Mesh(new THREE.TorusGeometry(15, 1, 15, 30,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x7DE5ED}));
+        const ring2 = new THREE.Mesh(new THREE.TorusGeometry(10, 1, 15, 30,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x81C6E8}));
+        const ring3 = new THREE.Mesh(new THREE.TorusGeometry(5, 1, 15, 30,4.6),new THREE.MeshBasicMaterial({wireframe:true, color: 0x5DA7DB}));
         const ball = new THREE.Mesh(new THREE.SphereGeometry(2,20,20), new THREE.MeshBasicMaterial({wireframe: true, color: 0x5837D0}));
         scene.add(ball)
         scene.add(ring1)
@@ -30,7 +29,6 @@
 
         function animate(){
             requestAnimationFrame(animate)
-
 
             //3D spin animation
             // ring1.rotation.y += 0.02;
@@ -55,7 +53,7 @@
 
 <style>
     canvas {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
     }
 </style>
