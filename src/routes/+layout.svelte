@@ -1,19 +1,18 @@
 <script>
     import { goto } from "$app/navigation";
     import { userStore } from "../stores";
-    import { onMount } from "svelte"
+    import { onMount } from "svelte";
     let user = 0;
     let width;
     userStore.subscribe((value) => {
         if (value != 0) {
-            user = value.user;
+            user = value;
         }
     });
-    
+
     onMount(() => {
         width = screen.width;
     });
-
 </script>
 
 <div class="secondary topbar">
@@ -22,18 +21,25 @@
         <p>Software Developer</p>
     </div>
     <div class="nav">
-        <button on:click={() => goto("/")} class="topbar-buttons">Home</button>
-        <button on:click={() => goto("/blog")} class="topbar-buttons"
-            >Blog</button
-        >
-        {#if user == 0}
-            <button on:click={() => goto("/the-lab")} class="topbar-buttons"
-                >The Lab</button
-            >
+        {#if width < 640}
+            <button>Menu</button>
         {:else}
-            <button on:click={() => goto("/the-lab/profile")} class="topbar-buttons"
-                >{user.profile.name}</button
+            <button on:click={() => goto("/")} class="topbar-buttons"
+                >Home</button
             >
+            <button on:click={() => goto("/blog")} class="topbar-buttons"
+                >Blog</button
+            >
+            {#if user == 0}
+                <button on:click={() => goto("/the-lab")} class="topbar-buttons"
+                    >The Lab</button
+                >
+            {:else}
+                <button
+                    on:click={() => goto("/the-lab/profile")}
+                    class="topbar-buttons">{user.profile.name}</button
+                >
+            {/if}
         {/if}
     </div>
 </div>
@@ -42,7 +48,7 @@
 
 <slot />
 
-<div class="footer-spacer" />
+<!-- <div class="footer-spacer" /> -->
 
 <!-- <div class="footer secondary">
     <p>This site was built with Svelte</p>
@@ -94,7 +100,7 @@
     }
 
     .topbar-spacer {
-        height: 60px;
+        height: 70px;
     }
 
     .footer-spacer {
@@ -104,7 +110,7 @@
     /* Actual styles related to the topbar */
     .topbar {
         width: 100%;
-        height: fit-content;
+        height: 70px;
         display: flex;
         position: fixed;
         top: 0;
