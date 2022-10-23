@@ -100,7 +100,7 @@
         client.users
             .authViaEmail(email, password)
             .then((yay) => {
-                userStore.set(yay);
+                userStore.set(yay.user);
                 goto("/the-lab/profile")
             })
             .catch((error) => {
