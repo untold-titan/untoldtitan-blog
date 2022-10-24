@@ -6,6 +6,8 @@
   import * as THREE from "three";
   import Loading from "../components/Loading.svelte";
   let canvas;
+  let width;
+  let acknowledge = false;
 
   //three.js
   onMount(() => {
@@ -52,22 +54,23 @@
   let posts = [];
   //Pocketbase
   onMount(() => {
+    width = screen.width
     const client = new Pocketbase("https://cataclysmpocket.tech/");
     client.records
       .getFullList("posts", 200 /* batch size */, {
         sort: "-created",
       })
       .then((res) => {
-        res.forEach((item) =>{
+        res.forEach((item) => {
           posts.push({
-            "title":item.title,
-            "body":item.body,
-            "imageURL":item.imageURL,
-            "linkText":item.linkText || "",
-            "linkURL":item.linkURL || ""
-          })
-        })
-        posts = posts
+            title: item.title,
+            body: item.body,
+            imageURL: item.imageURL,
+            linkText: item.linkText || "",
+            linkURL: item.linkURL || "",
+          });
+        });
+        posts = posts;
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +81,19 @@
 <head>
   <title>Titan's Blog</title>
 </head>
+
+{#if width < 640 && acknowledge == false}
+<div class="warning secondary">
+  <p>
+    Hey, just so you know, the mobile version of this site isn't complete yet,
+    so expect to find bugs. If you notice anything you want fixed NOW, feel free
+    to open an issue on github.
+  </p>
+  <div class="center">
+    <button on:click={() => acknowledge = true}>Cool, thanks</button>
+  </div>
+</div>
+{/if}
 
 <div class="main">
   <div class="flex">
@@ -137,6 +153,11 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  .warning{
+    padding: 15px;
+  }
+
   .spacer {
     margin: 75px 150px;
     padding: 30px 50px;
@@ -153,7 +174,7 @@
   .posts {
     padding: 30px 15px;
   }
-  .container{
+  .container {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -161,15 +182,15 @@
 
   /* Media Queries */
   /* Mobile Devices */
-  @media screen and (max-width: 640px){
-    .flex{
+  @media screen and (max-width: 640px) {
+    .flex {
       display: block;
     }
-    .spacer{
+    .spacer {
       border-radius: 0px;
       margin: 75px 0px;
     }
-    .posts{
+    .posts {
       padding: 35px 27px;
     }
   }

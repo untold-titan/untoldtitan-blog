@@ -2,59 +2,113 @@
     import { userStore } from "../../../stores";
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
+    import Pocketbase from "pocketbase";
+    import Experiment from "../../../components/Experiment.svelte"
+    const client = new Pocketbase("https://cataclysmpocket.tech");
     let user = 0;
     userStore.subscribe((val) => {
         if (val != 0) {
             user = val;
-            console.log(user)
+            console.log(user);
         }
     });
+    let experiments;
+    let width;
+    let ignore = false;
     onMount(() => {
-        if(user == 0){
-            goto("/the-lab")
+        width = screen.width;
+        if (user == 0) {
+            goto("/the-lab");
+            console.error("You must be logged in to view this page!!");
+        } else {
+            //Get all experiments that are currently open
+            client.records
+                .getFullList("experiments", 200)
+                .then((val) => {
+                    console.log("Retreived Experiments from Backend");
+                    console.log(val);
+                    experiments = val;
+                })
+                .catch((error) => {
+                    console.warn("An error occured!");
+                    console.warn(error);
+                });
         }
     });
 </script>
 
-{#if user != 0}
+{#if screen.width < 640}
+    {#if ignore == false}
+        <p class="warning">
+            You shouldn't be here. I'm currently working on the mobile version
+            of The Lab, but currently it's functionality is very limited. If you
+            don't care, feel free to continue, but be prepared for bugs, issues
+            and weird page renders.
+        </p>
+        <div class="center">
+            <button on:click={() => (ignore = true)}
+                >I don't care, LET ME INNNN</button
+            >
+        </div>
+    {/if}
+{/if}
+<!-- User must be logged in no matter WHAT. -->
+{#if (user != 0 && screen.width > 640) || (ignore == true && user != 0)}
     <div class="flex">
         <div class="profile secondary centerText">
-            <img src="/profile.jpg" alt="profile" class="pfp"/>
+            <img src="/profile.jpg" alt="profile" class="pfp" />
             <h1>{user.profile.name}</h1>
         </div>
-        <div>
-            Experiments go here
+        <div class="right-side">
+            <h1>Open Experiments</h1>
+            <Experiment/> 
         </div>
     </div>
 {/if}
 
 <style>
-    .pfp{
+    .right-side {
         width: 80%;
-        border-radius: 1000px;
-        
+        margin-left:30px;
     }
 
-    h1{
-        margin-top: 15px;
+    .pfp {
+        width: 80%;
+        border-radius: 1000px;
     }
-    .centerText{
+
+    h1 {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    .centerText {
         text-align: center;
     }
 
-    .flex{
+    .flex {
         display: flex;
     }
 
-    .secondary{
+    .secondary {
         padding-top: 10px;
         width: 15%;
         border: 0;
         border-top: 2px;
         border-color: grey;
-        border-style:solid;
+        border-style: solid;
         height: calc(100vh - 82px);
     }
 
-    
+    .profile {
+        width: 15%;
+    }
+
+    .warning {
+        padding: 15px;
+    }
+
+    .care {
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
