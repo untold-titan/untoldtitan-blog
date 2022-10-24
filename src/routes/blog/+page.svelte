@@ -4,7 +4,7 @@
   import Pocketbase from "pocketbase";
   import { onMount } from "svelte";
 
-  let posts = 0;
+  let posts = [];
   onMount(() => {
     const client = new Pocketbase("https://cataclysmpocket.tech/");
     client.records
@@ -12,9 +12,14 @@
         sort: "-created",
       })
       .then((res) => {
-        console.log(res);
-        console.log(res[0]);
-        posts = res;
+        res.forEach(item=>{
+          posts.push({
+            "title":item.title,
+            "description":item.description,
+            "content":item.content
+          })
+        })
+        posts = posts;
       })
       .catch((err) => {
         console.log(err);

@@ -49,7 +49,7 @@
     }
     animate();
   });
-  let posts = 0;
+  let posts = [];
   //Pocketbase
   onMount(() => {
     const client = new Pocketbase("https://cataclysmpocket.tech/");
@@ -58,9 +58,16 @@
         sort: "-created",
       })
       .then((res) => {
-        console.log(res);
-        console.log(res[0]);
-        posts = res;
+        res.forEach((item) =>{
+          posts.push({
+            "title":item.title,
+            "body":item.body,
+            "imageURL":item.imageURL,
+            "linkText":item.linkText || "",
+            "linkURL":item.linkURL || ""
+          })
+        })
+        posts = posts
       })
       .catch((err) => {
         console.log(err);
