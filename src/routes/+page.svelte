@@ -54,6 +54,7 @@
   });
   let posts = [];
   //Pocketbase
+
   const client = new Pocketbase("https://cataclysmpocket.tech/");
   client.records
     .getFullList("posts", 200 /* batch size */, {
@@ -68,7 +69,6 @@
           linkText: item.linkText || "",
           linkURL: item.linkURL || "",
         });
-      });
       posts = posts;
     })
     .catch((err) => {
@@ -151,6 +151,7 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 
   .warning {
     padding: 15px;

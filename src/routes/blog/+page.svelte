@@ -4,6 +4,7 @@
   import Pocketbase from "pocketbase";
 
   let posts = [];
+
   const client = new Pocketbase("https://cataclysmpocket.tech/");
   client.records
     .getFullList("blog_posts", 200 /* batch size */, {
