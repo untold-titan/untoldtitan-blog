@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import Pocketbase from "pocketbase";
-    import Experiment from "../../../components/Experiment.svelte"
+    import Experiment from "../../../components/Experiment.svelte";
     const client = new Pocketbase("https://cataclysmpocket.tech");
     let user = 0;
     userStore.subscribe((val) => {
@@ -12,26 +12,33 @@
             console.log(user);
         }
     });
-    let experiments;
+    let experiments = 0;
     let width;
     let ignore = false;
+    client.records
+        .getFullList("experiments", 200)
+        .then((val) => {
+            console.log("Retreived Experiments from Backend");
+            console.log(val);
+            val.forEach((item) => {
+                experiments = [];
+                experiments.push({
+                    name: item.name,
+                    description: item.description,
+                    location: item.location,
+                });
+                experiments = experiments;
+            });
+        })
+        .catch((error) => {
+            console.warn("An error occured!");
+            console.warn(error);
+        });
     onMount(() => {
+        //Needs to stay in onMount because of the goto
         if (user == 0) {
             goto("/the-lab");
             console.error("You must be logged in to view this page!!");
-        } else {
-            //Get all experiments that are currently open
-            client.records
-            .getFullList("experiments", 200)
-            .then((val) => {
-                console.log("Retreived Experiments from Backend");
-                    console.log(val);
-                    experiments = val;
-                })
-                .catch((error) => {
-                    console.warn("An error occured!");
-                    console.warn(error);
-                });
         }
         width = screen.width;
     });
@@ -62,17 +69,18 @@
         <div class="right-side">
             <h1>Open Experiments</h1>
             <div class="experiments">
-                <Experiment/> 
-                <Experiment/> 
-                <Experiment/> 
-                <Experiment/> 
+                {#if experiments != 0}
+                    {#each experiments as experiment}
+                        <Experiment {...experiment} />
+                    {/each}
+                {/if}
             </div>
         </div>
     </div>
 {/if}
 
 <style>
-    .experiments{
+    .experiments {
         display: flex;
         height: 35%;
         overflow-x: scroll;
@@ -80,7 +88,7 @@
 
     .right-side {
         width: 80%;
-        margin-left:30px;
+        margin-left: 30px;
     }
 
     .pfp {
@@ -116,10 +124,5 @@
 
     .warning {
         padding: 15px;
-    }
-
-    .care {
-        margin-left: auto;
-        margin-right: auto;
     }
 </style>

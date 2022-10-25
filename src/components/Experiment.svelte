@@ -1,15 +1,16 @@
 <script>
     import { goto } from "$app/navigation";
-    export let title = "Experiment Title";
+    export let name = "Experiment Title";
     export let description = "A description";
-    export let experimentLink = "/the-lab/experiments";
+    export let location = "/the-lab/experiments";
+
 </script>
 
 <div class="container secondary">
     <div class="button-cont center">
-        <button on:click={goto(experimentLink)}>Take me there!</button>
+        <button on:click={goto(location)}>Take me there!</button>
     </div>
-    <h1>{title}</h1>
+    <h1>{name}</h1>
     <p>{description}</p>
 </div>
 
@@ -34,6 +35,7 @@
 
     .container {
         min-width: 500px;
+        max-width: 500px;
         margin-right: 30px;
         margin-bottom: 5px;
         /* height: 40%;  - Inherited from container*/
