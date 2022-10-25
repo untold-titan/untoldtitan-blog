@@ -99,12 +99,46 @@
         font-family: "Montserrat", sans-serif;
     }
 
-    .topbar-spacer {
-        height: 70px;
+    /* Firefox */
+    :global(*) {
+        scrollbar-width: thin;
+        scrollbar-color: #004a4e #dfe9eb;
     }
 
-    .footer-spacer {
-        height: 75px;
+    /* Chrome, Edge and Safari */
+    :global(*::-webkit-scrollbar) {
+        width: 10px;
+        width: 10px;
+    }
+
+    :global(*::-webkit-scrollbar-track) {
+        border-radius: 5px;
+        background-color: #888888;
+    }
+
+    :global(*::-webkit-scrollbar-track:hover) {
+        background-color: #888888;
+    }
+
+    :global(*::-webkit-scrollbar-track:active) {
+        background-color: #888888;
+    }
+
+    :global(*::-webkit-scrollbar-thumb) {
+        border-radius: 6px;
+        background-color: #004a4e;
+    }
+
+    :global(*::-webkit-scrollbar-thumb:hover) {
+        background-color: #003f42;
+    }
+
+    :global(*::-webkit-scrollbar-thumb:active) {
+        background-color: #003235;
+    }
+
+    .topbar-spacer {
+        height: 70px;
     }
 
     /* Actual styles related to the topbar */

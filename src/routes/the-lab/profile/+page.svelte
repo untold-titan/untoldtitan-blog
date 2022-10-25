@@ -16,16 +16,15 @@
     let width;
     let ignore = false;
     onMount(() => {
-        width = screen.width;
         if (user == 0) {
             goto("/the-lab");
             console.error("You must be logged in to view this page!!");
         } else {
             //Get all experiments that are currently open
             client.records
-                .getFullList("experiments", 200)
-                .then((val) => {
-                    console.log("Retreived Experiments from Backend");
+            .getFullList("experiments", 200)
+            .then((val) => {
+                console.log("Retreived Experiments from Backend");
                     console.log(val);
                     experiments = val;
                 })
@@ -34,10 +33,11 @@
                     console.warn(error);
                 });
         }
+        width = screen.width;
     });
 </script>
 
-{#if screen.width < 640}
+{#if width < 640}
     {#if ignore == false}
         <p class="warning">
             You shouldn't be here. I'm currently working on the mobile version
@@ -53,7 +53,7 @@
     {/if}
 {/if}
 <!-- User must be logged in no matter WHAT. -->
-{#if (user != 0 && screen.width > 640) || (ignore == true && user != 0)}
+{#if (user != 0 && width > 640) || (ignore == true && user != 0)}
     <div class="flex">
         <div class="profile secondary centerText">
             <img src="/profile.jpg" alt="profile" class="pfp" />
@@ -61,12 +61,23 @@
         </div>
         <div class="right-side">
             <h1>Open Experiments</h1>
-            <Experiment/> 
+            <div class="experiments">
+                <Experiment/> 
+                <Experiment/> 
+                <Experiment/> 
+                <Experiment/> 
+            </div>
         </div>
     </div>
 {/if}
 
 <style>
+    .experiments{
+        display: flex;
+        height: 35%;
+        overflow-x: scroll;
+    }
+
     .right-side {
         width: 80%;
         margin-left:30px;
