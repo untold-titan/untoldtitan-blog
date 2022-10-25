@@ -46,7 +46,7 @@
       donut.rotation.z += 0.03;
       donut.rotation.y += 0.02;
       donut.rotation.x += 0.03;
-      
+
       renderer.render(scene, camera);
     }
     animate();
@@ -61,19 +61,21 @@
       sort: "-created",
     })
     .then((res) => {
-      res.forEach((item) => {
-        posts.push({
-          title: item.title,
-          body: item.body,
-          imageURL: item.imageURL,
-          linkText: item.linkText || "",
-          linkURL: item.linkURL || "",
+      res
+        .forEach((item) => {
+          posts.push({
+            title: item.title,
+            body: item.body,
+            imageURL: item.imageURL,
+            linkText: item.linkText || "",
+            linkURL: item.linkURL || "",
+          });
+          posts = posts;
         });
-      posts = posts;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      })
+        .catch((err) => {
+          console.log(err);
+        });
 </script>
 
 <head>
@@ -151,7 +153,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-
 
   .warning {
     padding: 15px;
