@@ -1,8 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import * as THREE from "three";
-    import {OrbitControls} from "three/examples/jsm/controls/OrbitControls"
-    import {page} from "$app/stores"
     let canvas;
     onMount(() =>{
         const camera = new THREE.PerspectiveCamera(70,screen.width/screen.height,0.001,1000);

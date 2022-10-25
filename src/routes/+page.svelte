@@ -50,18 +50,19 @@
       renderer.render(scene, camera);
     }
     animate();
+    width = screen.width;
   });
   let posts = [];
   //Pocketbase
-  onMount(() => {
-    width = screen.width
-    const client = new Pocketbase("https://cataclysmpocket.tech/");
-    client.records
-      .getFullList("posts", 200 /* batch size */, {
-        sort: "-created",
-      })
-      .then((res) => {
-        res.forEach((item) => {
+
+  const client = new Pocketbase("https://cataclysmpocket.tech/");
+  client.records
+    .getFullList("posts", 200 /* batch size */, {
+      sort: "-created",
+    })
+    .then((res) => {
+      res
+        .forEach((item) => {
           posts.push({
             title: item.title,
             body: item.body,
@@ -69,13 +70,12 @@
             linkText: item.linkText || "",
             linkURL: item.linkURL || "",
           });
+          posts = posts;
         });
-        posts = posts;
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+        .catch((err) => {
+          console.log(err);
+        });
 </script>
 
 <head>
@@ -83,16 +83,16 @@
 </head>
 
 {#if width < 640 && acknowledge == false}
-<div class="warning secondary">
-  <p>
-    Hey, just so you know, the mobile version of this site isn't complete yet,
-    so expect to find bugs. If you notice anything you want fixed NOW, feel free
-    to open an issue on github.
-  </p>
-  <div class="center">
-    <button on:click={() => acknowledge = true}>Cool, thanks</button>
+  <div class="warning secondary">
+    <p>
+      Hey, just so you know, the mobile version of this site isn't complete yet,
+      so expect to find bugs. If you notice anything you want fixed NOW, feel
+      free to open an issue on github.
+    </p>
+    <div class="center">
+      <button on:click={() => (acknowledge = true)}>Cool, thanks</button>
+    </div>
   </div>
-</div>
 {/if}
 
 <div class="main">
@@ -154,7 +154,7 @@
     margin-right: auto;
   }
 
-  .warning{
+  .warning {
     padding: 15px;
   }
 
