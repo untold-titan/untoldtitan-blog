@@ -21,7 +21,8 @@
     .post-body{
         color:whitesmoke;
         border-radius: 35px;
-        padding:20px
+        padding:20px;
+        display: inline-block;
     }
     div {
         width: 30%;

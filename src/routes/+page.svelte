@@ -173,6 +173,7 @@
   }
   .posts {
     padding: 30px 15px;
+    
   }
   .container {
     width: fit-content;
