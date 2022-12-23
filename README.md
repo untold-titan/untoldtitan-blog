@@ -1,18 +1,8 @@
-# Work has BEGUN!!!
-I've started working on my new blog site.
-Keep up with the progress on this repo.
+# Well, Here we go again
+Updating the blog site... again...
 
-# Tech?
-Yep, I got some cool tech here
-- Svelte
-- Three.js
-- Pocketbase backend
-- Azure VM to host it all
+This time, I'm gonna make it more like a portfolio. Probably won't even have a backend lol
 
-# Future Additions?
-I want to add 2 things.
-1. The Lab, a testing place for all my web based experiments, and also possibly open it up to other developers to host their things on my site to show off their work as well.
-2. I'm considering making an integration with Manabox, to show my MTG collection on my site, and be able to sell cards from my site. 
-
-# Found something wrong? Got ideas?
-Feel free to open an issue or message me on discord. Untold_Titan#1616
+## Ideas
+- Space themed 3D background, that moves as you scroll. I'm thinking a spaceship that lifts off Earth, does an orbit or two, flies off into hyperspace, and then comes out at a space station that it docks with, and then inside that station is a bunch of my acheivements/things I'd like to show off. Through out it, I'd like to put space billboards that have actuall admob ads on them, cause I think it'd be cool.
+- Thats basically it. I really want to make something with three.js, and this just seems like a great way to do it. 
