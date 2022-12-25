@@ -1,45 +1,43 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+  import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+  import * as THREE from "three";
+  import { onMount } from "svelte";
+
+  let canvas;
+  let width = 1920;
+  let height = 1080;
+
+  onMount(() => {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    document.body.append(renderer.domElement);
+
+    // const loader = new GLTFLoader();
+    // const dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath("/examples/jsm/libs/draco");
+    // loader.setDRACOLoader(dracoLoader);
+    // loader.load("/TestingCube.gltf", function (gltf) {
+    //   scene.add(gltf.scene);
+    // },(progress)=>{console.log(progress)},(error)=>{console.log(error)});
+
+    const grid = new THREE.GridHelper(100,100,0x0000FF, 0x00FF00)
+    let controls = new OrbitControls(camera, renderer.domElement);
+    
+    scene.add(grid);
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+      controls.update();
+    }
+    animate();
+    width = window.innerWidth;
+    height = window.innerHeight;
+  });
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+<canvas bind:this={canvas} width={width} height={height} />
