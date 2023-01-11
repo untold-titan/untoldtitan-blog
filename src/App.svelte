@@ -46,6 +46,8 @@
 
     let w = false;
     let s = false;
+    let a = false;
+    let d = false;
 
     function keyDownHandler(e) {
       if (e.key == "w") {
@@ -54,8 +56,14 @@
       if (e.key == "s") {
         s = true;
       }
+      if (e.key == "a") {
+        a = true;
+      }
+      if (e.key == "d") {
+        d = true;
+      }
     }
-
+    
     function keyUpHandler(e) {
       if (e.key == "w") {
         w = false;
@@ -63,13 +71,18 @@
       if (e.key == "s") {
         s = false;
       }
+      if (e.key == "a") {
+        a = false;
+      }
+      if (e.key == "d") {
+        d = false;
+      }
     }
 
     let acceleration = 0;
 
-
     let speed = .15;
-    let accelerationForward = 0.007;
+    let accelerationForward = 0.005;
     let accelerationReverse = 0.005;
     let drag = 0.003;
 
@@ -97,13 +110,46 @@
       }
     }
 
+    //Turning
+    function rotation(){
+      if(a){
+        if(ship.rotation.z < 0.2){
+          ship.rotation.z += 0.02
+        }
+        ship.rotation.y += 0.02
+      }
+      if(d){
+        if(ship.rotation.z > -0.2){
+          ship.rotation.z -= 0.02
+        }
+        ship.rotation.y -= 0.02
+      }
+      if(a == false && d == false && ship.rotation.z != 0){
+        if(ship.rotation.z > 0){
+          ship.rotation.z -= 0.02
+        }
+        if(ship.rotation.z < 0){
+          ship.rotation.z += 0.02
+        }
+
+      } 
+    }
+
+    var travelAxis = new THREE.Vector3();
+    travelAxis.z = 1.5
+
+    ship.add(camera)
+
     function animate() {
       movement()
-      ship.position.z -= acceleration;
-      //Parented Camera to Ship.
-      camera.position.x = ship.position.x;
-      camera.position.y = ship.position.y + 2;
-      camera.position.z = ship.position.z + 10;
+      rotation()
+      ship.translateOnAxis(travelAxis,-acceleration)
+
+      // camera.position.x = ship.position.x;
+      // camera.position.y = ship.position.y + 2;
+      // camera.position.z = ship.position.z + 10;
+      // camera.rotation.y = ship.rotation.y;
+
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
     }
