@@ -1,13 +1,10 @@
-# My first Dockerfile, lets goooo
-FROM node
+FROM npm
 
 COPY . /app
 
 WORKDIR /app
 
-RUN npm install
+RUN npm i
 
-EXPOSE 5173/tcp
-EXPOSE 5173/udp
-
-CMD ["npm","run","dev host"]
+START ["npm","run","dev host"]
+# When running this with docker, add the arg -p 8080:5173, replace 8080 with what port you want to host it on.
