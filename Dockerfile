@@ -10,4 +10,4 @@ RUN npm install
 EXPOSE 5173/tcp
 EXPOSE 5173/udp
 
-CMD ["npm","run","dev"]
+CMD ["npm","run","dev host"]
