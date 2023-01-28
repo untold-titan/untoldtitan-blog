@@ -78,6 +78,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.home {
+  width: 100%;
+  height: 100vh;
+}
+
 .cool-text:hover {
   background: linear-gradient(90deg, blue, #00ff00, blue, #00ff00);
   background-size: 300%, 100%;
