@@ -1,4 +1,4 @@
-FROM npm
+FROM node
 
 COPY . /app
 
